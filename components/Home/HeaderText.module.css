@@ -1,0 +1,21 @@
+.styletext {
+    color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+}
+
+.styletext h1 {
+    font-size: 50px;
+    font-weight: 700;
+    text-shadow: 2px 1px 1px black;
+}
+
+.styletext h1 span {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: white;
+    color: red;
+    text-shadow: 3px 2px 5px 3px black;
+
+}
