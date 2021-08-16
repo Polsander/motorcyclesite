@@ -2,6 +2,10 @@ html,
 body {
   padding: 0;
   margin: 0;
+  background-image: url('https://th.bing.com/th/id/R.c00d186bbdc0519f4d57e4116135fac1?rik=guO7BiWHy876Fg&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fwp1879524.jpg&ehk=wbTdKReQ3JLLStD4yKEvISaBzFzQ6Xp3qLL%2b4oA2f9I%3d&risl=&pid=ImgRaw&r=0');
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
