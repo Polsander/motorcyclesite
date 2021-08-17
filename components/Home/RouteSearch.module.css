@@ -1,0 +1,16 @@
+.formformat input{
+    max-width: 35em;
+    display: inline;
+    align-items: center;
+}
+
+.formformat button {
+    margin-left: 12px;
+    margin-bottom: 5px;
+}
+
+@media screen and (max-width: 500px) {
+    .formformat button {
+        margin-top: 7px;
+    }
+}
