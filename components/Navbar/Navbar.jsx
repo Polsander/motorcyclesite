@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 import DropDown from './DropDown';
 
@@ -9,6 +10,23 @@ import classes from './Navbar.module.css';
 
 
 const Navbar = () => {
+
+    const router = useRouter();
+
+    async function logoutHandler(e) {
+        e.preventDefault();
+        const response = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const callback = await response.json();
+        console.log(callback);
+        router.replace('/');
+    }
+
     return (
         <div className={classes.navigation}>
             <nav className="navbar navbar-expand-lg  ">
@@ -37,6 +55,9 @@ const Navbar = () => {
                             </li>
                             <li className="nav-item">
                                 <span className={`nav-link ${classes.subnav}`}><Link href="/user/signup">Register</Link></span>
+                            </li>
+                            <li className="nav-item">
+                                <span className={`nav-link ${classes.subnav}`}><button onClick={logoutHandler}>Logout</button></span>
                             </li>
                         </ul>
 

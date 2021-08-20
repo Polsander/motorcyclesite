@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
 import { useRouter } from 'next/router'
+import withSession from '../../lib/session';
+
 
 import Navbar from '../../components/Navbar/Navbar';
 
@@ -49,6 +51,35 @@ const login = () => {
             </form>
         </React.Fragment>
     )
+}
+
+export async function getServerSideProps() {
+
+    //const userData = null
+
+    export default withSession(async (req, res) => {
+        const user = req.session.get('user');
+        userData = res.json(user);
+        console.log(userData);
+        return userData
+    });
+
+    
+    
+
+    console.log(userData);
+    if (userData) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            }
+        }
+    }
+
+    return {
+        props: {},
+    }
 }
 
 export default login
