@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 
-import DropDown from './DropDown';
+import withSession from '../../lib/session';
 
+import DropDown from './DropDown';
 
 import classes from './Navbar.module.css';
 
 
 
-const Navbar = () => {
+const Navbar = (props) => {
 
     const router = useRouter();
+
+
 
     async function logoutHandler(e) {
         e.preventDefault();
@@ -40,25 +43,28 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <span className={`nav-link ${classes.subnav}`}><Link href="/user">Link</Link></span>
+                                <span className={`nav-link ${classes.subnav}`}><Link href="/user">Blog</Link></span>
                             </li>
                             <li className="nav-item">
-                                <span className={`nav-link ${classes.subnav}`}><Link href="/user">Link</Link></span>
+                                <span className={`nav-link ${classes.subnav}`}><Link href="/user">Gear</Link></span>
                             </li>
                             <li className="nav-item">
-                                <span className={`nav-link ${classes.subnav}`}><Link href="/user">Link</Link></span>
+                                <span className={`nav-link ${classes.subnav}`}><Link href="/user">Routes</Link></span>
                             </li>
                         </ul>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <span className={`nav-link ${classes.subnav}`}><Link href="/user/login">Login</Link></span>
-                            </li>
-                            <li className="nav-item">
-                                <span className={`nav-link ${classes.subnav}`}><Link href="/user/signup">Register</Link></span>
-                            </li>
-                            <li className="nav-item">
+                            {props.user && <li className="nav-item">
                                 <span className={`nav-link ${classes.subnav}`}><button onClick={logoutHandler}>Logout</button></span>
-                            </li>
+                            </li>}
+
+                            {!props.user && <li className="nav-item">
+                                <span className={`nav-link ${classes.subnav}`}><Link href="/user/login">Login</Link></span>
+                            </li> }
+
+                            {!props.user && <li className="nav-item">
+                                <span className={`nav-link ${classes.subnav}`}><Link href="/user/signup">Register</Link></span>
+                            </li> }
+
                         </ul>
 
                     </div>
@@ -67,7 +73,9 @@ const Navbar = () => {
         </div>
 
     )
+
 }
+
 
 export default Navbar
 

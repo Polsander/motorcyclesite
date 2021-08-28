@@ -1,8 +1,7 @@
 import React, { useRef } from 'react'
 import { useRouter } from 'next/router'
+
 import withSession from '../../lib/session';
-
-
 import Navbar from '../../components/Navbar/Navbar';
 
 const login = () => {
@@ -33,7 +32,14 @@ const login = () => {
 
         const data = await response.json();
         console.log(data);
-        router.replace('/');
+        if(data.loggedIn) {
+            router.replace('/');
+        }
+        else {
+            usernameRef.current.value = ''
+            passwordRef.current.value = ''
+            return
+        }
 
     }
 
@@ -53,33 +59,23 @@ const login = () => {
     )
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps = withSession(async function ({ req, res }) {
 
-    //const userData = null
+    const user = req.session.get('user'); // Get the session
 
-    export default withSession(async (req, res) => {
-        const user = req.session.get('user');
-        userData = res.json(user);
-        console.log(userData);
-        return userData
-    });
-
-    
-    
-
-    console.log(userData);
-    if (userData) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            }
-        }
+    if (!user) { //If there is no user
+        return { props: {} }
     }
 
     return {
-        props: {},
+        redirect: {
+            destination: '/',
+            permanent: false,
+        }
     }
-}
+
+})
+
+
 
 export default login

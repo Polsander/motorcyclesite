@@ -1,15 +1,19 @@
 import React from 'react'
 
+import withSession from '../lib/session'
 
 import Navbar from '../components/Navbar/Navbar'
 import HeaderText from '../components/Home/HeaderText'
 import BodyBackground from '../components/Home/BodyBackground'
 import RouteSearch from '../components/Home/RouteSearch'
 
-const Home = () => {
+
+const Home = (props) => {
+
+
   return (
     <React.Fragment>
-      <Navbar />
+      <Navbar user={props.user} />
       <div className="container-fluid">
         <HeaderText />
       </div>
@@ -23,6 +27,18 @@ const Home = () => {
     </React.Fragment>
   )
 }
+
+  export const getServerSideProps = withSession(async function ({req,res}) {
+    const user = req.session.get('user');
+
+    if (!user) {
+      return {props:{}}
+    }
+    console.log(user);
+    return {props:{user}}
+  })
+
+
 
 export default Home
 
